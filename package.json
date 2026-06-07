@@ -16,7 +16,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.1.1"
+    "electron-squirrel-startup": "^1.0.1"
   },
   "devDependencies": {
     "better-sqlite3": "^9.2.2",

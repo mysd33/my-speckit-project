@@ -165,6 +165,12 @@ label {
   transition: var(--transition);
 }
 
+.photo-tile-button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
 .photo-tile:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -188,11 +194,10 @@ label {
   cursor: pointer;
   transition: var(--transition);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  draggable: true;
 }
 
 .album-card:hover {
-  transform: translateY(-4px);
+  transform: scale(1.05);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -207,7 +212,8 @@ label {
   background-color: var(--color-surface);
 }
 
-.album-card-info {
+.album-card-info,
+.album-info {
   padding: calc(var(--spacing-unit) * 1.5);
 }
 
@@ -229,14 +235,14 @@ label {
 
 /* Date Section */
 .date-section {
-  margin: calc(var(--spacing-unit) * 3) 0;
+  margin: 24px 0;
 }
 
 .date-section-header {
   font-size: 18px;
   font-weight: 600;
   color: var(--color-text-secondary);
-  margin-bottom: calc(var(--spacing-unit) * 1.5);
+  margin-bottom: 12px;
   padding-left: calc(var(--spacing-unit) * 2);
 }
 
@@ -267,6 +273,23 @@ label {
 .page-actions {
   display: flex;
   gap: calc(var(--spacing-unit) * 1);
+}
+
+.album-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+.album-subtitle {
+  color: var(--color-text-secondary);
+  margin-top: calc(var(--spacing-unit) * 0.5);
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 12px;
+  cursor: pointer;
 }
 
 /* Empty State */

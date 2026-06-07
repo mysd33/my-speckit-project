@@ -144,30 +144,30 @@ description: "Task list for Photo Album Organizer feature implementation"
 
 ### Implementation
 
-- [ ] T030 [US1] Implement `albumService.listAlbums()` in `src/main/services/album-service.js`
+- [x] T030 [US1] Implement `albumService.listAlbums()` in `src/main/services/album-service.js`
   - Query: `SELECT * FROM albums ORDER BY date DESC, sort_order ASC`
   - Include derived field: `cover_thumb_path` (first photo's thumb_path, or null)
   - Include `photo_count` (count of photos in album)
   - Unit test in `tests/unit/album-service.test.js`: covers empty albums, multiple dates, sorting
-- [ ] T031 [US1] Implement `albums:list` IPC handler in `src/main/handlers/albums.js`
+- [x] T031 [US1] Implement `albums:list` IPC handler in `src/main/handlers/albums.js`
   - Call `albumService.listAlbums()`
   - Return `{ data: [...] }` or `{ error: string }`
   - Unit test: mock service, verify request/response shape
-- [ ] T032 [US1] Create `src/renderer/src/pages/home.js` page component
+- [x] T032 [US1] Create `src/renderer/src/pages/home.js` page component
   - Fetch albums via `api.albums.list()`
   - Group albums by date on client side (use `date` field)
   - Sort groups by date DESC (newest first)
   - Render date-section headers and album cards within each section
   - Show empty-state component if no albums
-- [ ] T033 [US1] Create `src/renderer/src/components/album-card.js` component
+- [x] T033 [US1] Create `src/renderer/src/components/album-card.js` component
   - Input: album object with `id, name, date, cover_thumb_path, photo_count`
   - Render: `<div class="album-card">` with cover image (or placeholder if null), album name, photo count, date
   - Image source: `app://${cover_thumb_path}` (using custom protocol)
   - Click: navigate to `#album/:id`
-- [ ] T034 [US1] Create `src/renderer/src/components/empty-state.js` component
+- [x] T034 [US1] Create `src/renderer/src/components/empty-state.js` component
   - Input: message text and optional CTA button
   - Render: centered, styled banner saying "No albums yet" with "Create your first album" button
-- [ ] T035 [P] [US1] Create `src/renderer/src/assets/style.css` section for home page layout
+- [x] T035 [P] [US1] Create `src/renderer/src/assets/style.css` section for home page layout
   - `.date-section { margin: 24px 0; }`
   - `.date-section-header { font-size: 18px; font-weight: 600; color: var(--color-text-secondary); margin-bottom: 12px; }`
   - `.album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }`
@@ -178,7 +178,7 @@ description: "Task list for Photo Album Organizer feature implementation"
 
 ### E2E Test
 
-- [ ] T036 [US1] Create `tests/e2e/home.spec.js` Playwright test
+- [x] T036 [US1] Create `tests/e2e/home.spec.js` Playwright test
   - Seed DB with 3 albums before test (use Electron context)
   - Load app, verify albums appear in correct order
   - Verify date section headers are present
@@ -197,28 +197,28 @@ description: "Task list for Photo Album Organizer feature implementation"
 
 ### Implementation
 
-- [ ] T037 [P] [US2] Implement `photoService.listPhotos(albumId)` in `src/main/services/photo-service.js`
+- [x] T037 [P] [US2] Implement `photoService.listPhotos(albumId)` in `src/main/services/photo-service.js`
   - Query: `SELECT * FROM photos WHERE album_id = ? ORDER BY sort_order ASC`
   - Unit test: verify sort order, empty album case
-- [ ] T038 [P] [US2] Implement `photos:list` IPC handler in `src/main/handlers/photos.js`
+- [x] T038 [P] [US2] Implement `photos:list` IPC handler in `src/main/handlers/photos.js`
   - Call `photoService.listPhotos(albumId)`
   - Return `{ data: [...] }` or `{ error: string }`
-- [ ] T039 [US2] Create `src/renderer/src/pages/album.js` page component
+- [x] T039 [US2] Create `src/renderer/src/pages/album.js` page component
   - Parse URL for `album_id` from hash
   - Fetch album details (name, date) via `api.albums.list()` then filter
   - Fetch photos via `api.photos.list(albumId)`
   - Render: album header (back button, name, date), photo tile grid, empty-state if no photos
   - On tile click: show lightbox with that photo
-- [ ] T038 [US2] Create `src/renderer/src/components/photo-tile.js` component
+- [x] T038 [US2] Create `src/renderer/src/components/photo-tile.js` component
   - Input: photo object with `id, thumb_path`
   - Render: `<img src="app://${thumb_path}" class="photo-tile">`
   - Click event: emit custom event or callback to parent (album.js) to show lightbox
-- [ ] T039 [US2] Create `src/renderer/src/components/lightbox.js` component
+- [x] T039 [US2] Create `src/renderer/src/components/lightbox.js` component
   - Input: photo object with `id, file_path, filename`
   - Render: full-screen overlay with larger image via `<img src="app://${file_path}">` 
   - Close button (top-right) or Escape key to close
   - Navigation: Next/Previous buttons to cycle through album photos
-- [ ] T040 [P] [US2] Add CSS for album page and photo grid in `style.css`
+- [x] T040 [P] [US2] Add CSS for album page and photo grid in `style.css`
   - `.album-header { padding: 16px; border-bottom: 1px solid var(--color-border); }`
   - `.back-button { display: inline-block; margin-bottom: 12px; cursor: pointer; }`
   - `.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; padding: 16px; }`
@@ -228,14 +228,14 @@ description: "Task list for Photo Album Organizer feature implementation"
 
 ### Unit Tests
 
-- [ ] T041 [P] [US2] Create `tests/unit/photo-service.test.js` Vitest tests
+- [x] T041 [P] [US2] Create `tests/unit/photo-service.test.js` Vitest tests
   - Test `listPhotos(albumId)` with seeded photos, verify sort order
   - Test with empty album
   - Mock DB via in-memory SQLite
 
 ### E2E Test
 
-- [ ] T042 [US2] Create `tests/e2e/album-view.spec.js` Playwright test
+- [x] T042 [US2] Create `tests/e2e/album-view.spec.js` Playwright test
   - Seed album with 5 photos
   - Navigate to album view
   - Verify all 5 tiles render
