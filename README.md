@@ -62,7 +62,7 @@
     - デフォルトだと、[specフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs)に、仕様毎にフォルダができて、その中に、プロンプトのアウトプットであるmdファイルが生成されていきます。
     - [specs/001-photo-album-organizer](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)フォルダに成果物があります。
 
-- プロンプトを実行するごとに、主に、以下のようなアウトプットが生成されていきます。
+- プロンプトを実行するごとに、主に、以下のような設計成果物が生成されていきます。
     - プロンプト[/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)で作成
         - [constitution.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/memory/constitution.md)
             - 併せてテンプレート[constitution-template.md](.specify/templates/constitution-template.md)を見るとよいです。
@@ -81,7 +81,7 @@
     - プロンプト[/speckit.tasks](.github/prompts/speckit.tasks.prompt.md)で作成
         - [tasks.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/tasks.md)
             - 併せてテンプレート[tasks-template.md](.specify/templates/tasks-template.md)を見るとよいです。
-    - プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)で作成
 
-
-- 最後に、プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)を実行することでトップフォルダにある[package.json](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/package.json)をはじめとした実装にかかわる設定ファイルや[srcフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/src)や[testsフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/tests)が作成され、実装コードが生成されていきます。
+- 最後に、プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)を実行することで、実装成果物が作成されていきます。
+    - どう生成されるかの実装計画は、前述の[tasks.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/tasks.md)を参照するとよいです。
+    - トップフォルダにある[package.json](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/package.json)をはじめとした実装にかかわる設定ファイルや[srcフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/src)や[testsフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/tests)が作成され、実装コードが生成されていきます。
