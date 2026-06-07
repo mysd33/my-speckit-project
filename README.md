@@ -49,7 +49,7 @@
 - なので、`## Outline`に、そのカスタムエージェントが実施する本処理の内容が書かれていて、ここを中心に、プロンプトの内容や、プロンプトの流れを理解していくと良いと思います。
     - [speckit.constitution.agent.mdのOutline](.github/agents/speckit.constitution.agent.md#outline)
     - [speckit.specify.agent.mdのOutline](.github/agents/speckit.specify.agent.md#outline)
-    - [speckit.plan.agent.mdのOutline](.github/agents/speckit.plan.agent.md#outline)
+    - [speckit.plan.agent.mdのOutline](.github/agents/speckit.plan.agent.md#outline)。
     - [speckit.tasks.agent.mdのOutline](.github/agents/speckit.tasks.agent.md#outline)
     - [speckit.implement.agent.mdのOutline](.github/agents/speckit.implement.agent.md#outline)
 
@@ -57,22 +57,31 @@
     - [scripts](.specify/scripts)
     - [templates](.specify/templates)
 
+
 - 各プロンプトおよびカスタムエージェント、スクリプトや成果物テンプレートの定義により、どういうアウトプットが実際に生成されるのかは、[001-photo-album-organizerブランチ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)の中身を見ていくとわかります。
     - デフォルトだと、[specフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs)に、仕様毎にフォルダができて、その中に、プロンプトのアウトプットであるmdファイルが生成されていきます。
     - [specs/001-photo-album-organizer](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)フォルダに成果物があります。
 
 - プロンプトを実行するごとに、主に、以下のようなアウトプットが生成されていきます。
+    - プロンプト[/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)で作成
+        - [constitution.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/memory/constitution.md)
+            - 併せてテンプレート[constitution-template.md](.specify/templates/constitution-template.md)を見るとよいです。
     - プロンプト[/speckit.specify](.github/prompts/speckit.specify.prompt.md)で作成
         - [spec.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/spec.md)
+            - 併せてテンプレート[spec-template.md](.specify/templates/spec-template.md)を見るとよいです。
     - プロンプト[/speckit.plan](.github/prompts/speckit.plan.prompt.md)で作成
         - [plan.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/plan.md)
-        - [research.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/research.md)
-        - [data-model.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/data-model.md)
-        - [contracts/](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/contracts/)
+            - 併せてテンプレート[plan-template.md](.specify/templates/plan-template.md)を見るとよいです。
+        - 併せて、以下の`research.md`、`data-model.md`、`contracts/`、`quickstart.md`が、どのように作成されるかは実行するワークフローが[Phase](.github/agents/speckit.plan.agent.md#phases)に書かれているので、これも見るとプロンプトの流れがより理解できると思います
+            - [research.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/research.md)
+            - [data-model.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/data-model.md)
+            - [contracts/](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/contracts/)
+            - [quickstart.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/quickstart.md)
+
     - プロンプト[/speckit.tasks](.github/prompts/speckit.tasks.prompt.md)で作成
         - [tasks.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/tasks.md)
-    - プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)
-        - [/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)
-        - プロジェクト憲章の作成
+            - 併せてテンプレート[tasks-template.md](.specify/templates/tasks-template.md)を見るとよいです。
+    - プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)で作成
+
 
 - 最後に、プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)を実行することでトップフォルダにある[package.json](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/package.json)をはじめとした実装にかかわる設定ファイルや[srcフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/src)配下の実装コードが生成されていきます。
