@@ -1,0 +1,34 @@
+{
+  "name": "photo-album-organizer",
+  "version": "0.1.0",
+  "description": "Desktop photo album organizer with Electron and SQLite",
+  "main": "./dist-electron/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-builder --publish never --win --mac --linux",
+    "lint": "eslint src --ext .js,.jsx",
+    "format": "prettier --write \"src/**/*.{js,jsx,css,html}\"",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.1.1"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^9.2.2",
+    "electron": "^30.0.0",
+    "electron-builder": "^24.9.1",
+    "electron-vite": "^2.0.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "vitest": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "@playwright/test": "^1.40.0",
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0"
+  }
+}

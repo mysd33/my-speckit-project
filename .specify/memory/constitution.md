@@ -1,50 +1,110 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+SYNC IMPACT REPORT
+==================
+Version change: (new) → 1.0.0
+Added principles:
+  - I. Code Quality
+  - II. Testing Standards
+  - III. User Experience Consistency
+  - IV. Performance Requirements
+Removed principles: none (initial ratification)
+Templates reviewed:
+  - .specify/templates/plan-template.md  ✅ Constitution Check gate aligns with 4 principles
+  - .specify/templates/spec-template.md  ✅ Acceptance Scenarios pattern supports UX + testing principles
+  - .specify/templates/tasks-template.md ✅ Phase structure supports quality gates and test tasks
+Deferred TODOs: none
+-->
+
+# my-project Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality (NON-NEGOTIABLE)
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All code MUST meet the following standards before merging:
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+- Every function, method, or module MUST have a single, clearly defined responsibility (Single Responsibility Principle).
+- Code MUST pass all configured linting and formatting checks with zero warnings in CI.
+- Pull requests MUST be reviewed by at least one peer before merging; authors MUST NOT self-approve.
+- Duplication MUST be refactored into shared abstractions when the same logic appears three or more times.
+- Dead code, unused imports, and commented-out blocks MUST be removed before merge.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+**Rationale**: Inconsistent quality compounds over time; enforcing objective standards at every PR prevents
+technical debt accumulation and keeps onboarding cost low.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### II. Testing Standards (NON-NEGOTIABLE)
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Automated testing is a first-class deliverable, not an afterthought:
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Unit test coverage MUST be ≥ 80 % for all new or modified modules; coverage regressions MUST be justified.
+- Tests MUST be written before or alongside implementation (test-driven where feasible); no feature is
+  considered complete without passing tests.
+- Integration tests MUST cover all public API contracts and inter-service boundaries.
+- Tests MUST be deterministic: no flaky tests are permitted in the main branch; flaky tests MUST be quarantined
+  and fixed within one sprint.
+- Test names MUST describe the scenario and expected outcome in plain language
+  (e.g., `returns_404_when_resource_not_found`).
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+**Rationale**: A reliable test suite is the safety net that enables refactoring and confident delivery. Gaps in
+coverage are a liability, not a shortcut.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### III. User Experience Consistency
+
+All user-facing surfaces MUST conform to the established design system and interaction patterns:
+
+- UI components MUST be sourced from the project design system; custom one-off components require design review
+  and explicit sign-off.
+- Navigation flows, error states, loading indicators, and empty states MUST follow documented UX patterns and be
+  consistent across all screens or pages.
+- Accessibility (WCAG 2.1 AA) MUST be maintained: semantic HTML, keyboard navigation, and sufficient colour
+  contrast are non-negotiable.
+- Copy, terminology, and tone MUST align with the project content style guide; no inconsistent labels across
+  equivalent actions.
+
+**Rationale**: Users build mental models from consistent interfaces. Divergence creates confusion, increases
+support burden, and erodes trust.
+
+### IV. Performance Requirements
+
+Shipped features MUST meet measurable performance budgets:
+
+- API endpoint p95 response time MUST be ≤ 200 ms under expected load; endpoints exceeding this MUST include a
+  written justification and an optimisation ticket.
+- Frontend pages MUST achieve a Lighthouse Performance score ≥ 85 on mobile; regressions below this threshold
+  block release.
+- Database queries MUST be reviewed for index usage; N+1 query patterns are prohibited.
+- Bundles and assets MUST not grow by more than 10 % in a single PR without a documented trade-off decision.
+
+**Rationale**: Performance is a feature. Degraded performance directly harms user experience and retention; clear
+budgets make performance regressions visible and actionable.
+
+## Quality Gates
+
+All pull requests MUST satisfy the following gates before merge:
+
+1. **CI green**: all tests pass, lint clean, no coverage regression.
+2. **Constitution check**: reviewer confirms each applicable principle is satisfied.
+3. **Performance budget**: no Lighthouse or p95 regression without documented justification.
+4. **UX review**: any user-facing change has been validated against the design system.
+
+## Development Workflow
+
+- Feature work MUST live on a dedicated branch following the `###-feature-name` naming convention.
+- Commit messages MUST follow Conventional Commits (`feat:`, `fix:`, `test:`, `refactor:`, etc.).
+- All merges to the main branch MUST go through a pull request; direct pushes are prohibited.
+- Breaking changes MUST be documented in CHANGELOG.md and communicated to affected teams before release.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other informal practices. Amendments require:
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+1. A written proposal describing the change and rationale.
+2. Review and approval by at least two project maintainers.
+3. A migration plan for any existing code that would violate the amended principle.
+4. A version bump following semantic versioning (MAJOR: principle removal/redefinition; MINOR: new principle or
+   material expansion; PATCH: clarification or wording fix).
+
+All PR reviews MUST verify compliance with applicable principles. Non-compliance MUST be flagged as a blocking
+review comment. Waivers require explicit written justification attached to the PR.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-31 | **Last Amended**: 2026-05-31
