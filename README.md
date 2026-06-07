@@ -84,4 +84,4 @@
     - プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)で作成
 
 
-- 最後に、プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)を実行することでトップフォルダにある[package.json](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/package.json)をはじめとした実装にかかわる設定ファイルや[srcフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/src)配下の実装コードが生成されていきます。
+- 最後に、プロンプト[/speckit.implement](.github/prompts/speckit.implement.prompt.md)を実行することでトップフォルダにある[package.json](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/package.json)をはじめとした実装にかかわる設定ファイルや[srcフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/src)や[testsフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/tests)が作成され、実装コードが生成されていきます。
