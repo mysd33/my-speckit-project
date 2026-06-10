@@ -16,9 +16,9 @@
     - [/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)
         - プロジェクト憲章の作成
     - [/speckit.specify](.github/prompts/speckit.specify.prompt.md)
-        - 仕様の作成
+        - 機能仕様の作成
     - [/speckit.plan](.github/prompts/speckit.plan.prompt.md)
-        - 仕様に基づいた技術的な実装計画の作成
+        - 機能仕様に基づいた技術的な実装計画の作成
     - [/speckit.tasks](.github/prompts/speckit.tasks.prompt.md)
         - 実装計画に基づいた実装タスクの作成
     - [/speckit.implement](.github/prompts/speckit.implement.prompt.md)
@@ -41,7 +41,8 @@
     - `## User Input`には、ユーザの入力内容（`$ARGUMENTS`）に従う旨が記載されています。
     - `## Pre-Execution Checks`には、プロンプトの実行前に、ユーザの入力内容が正しいかどうかを確認するためのチェック項目が記載されています。
         - エージェントにより生成される[.specify/extensions.yml](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/extensions.yml)に記載された拡張機能のフックの定義に基づいて、前処理を実行します。
-        - 主に、gitのブランチ作成やコミットの操作が記載されています。
+        - 主に、デフォルトでは、gitのブランチ作成やコミットの操作が記載されています。
+        - おそらく、Spec Kitのドキュメント[Extensions — Add New Capabilities](https://github.com/github/spec-kit#extensions--add-new-capabilities)に記載されている内容に基づいて、拡張機能を追加することができます。
     - `## Mandatory Post-Execution Hooks`には、プロンプトの実行後に必ず実行されるフックが記載されています。
         - `## Pre-Execution Checks`と同様に、エージェントにより生成される[.specify/extensions.yml]に記載された拡張機能のフックの定義に基づいて、後処理を実行します。
 
@@ -59,26 +60,28 @@
 
 
 - 各プロンプトおよびカスタムエージェント、スクリプトや成果物テンプレートの定義により、どういうアウトプットが実際に生成されるのかは、[001-photo-album-organizerブランチ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)の中身を見ていくとわかります。
-    - デフォルトだと、[specフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs)に、仕様毎にフォルダができて、その中に、プロンプトのアウトプットであるmdファイルが生成されていきます。
+    - デフォルトだと、[specsフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs)に、仕様毎にフォルダができて、その中に、プロンプトのアウトプットであるmdファイルが生成されていきます。
     - [specs/001-photo-album-organizer](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)フォルダに成果物があります。
 
 - プロンプトを実行するごとに、主に、以下のような設計成果物が生成されていきます。
-    - プロンプト[/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)で作成
-        - [constitution.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/memory/constitution.md)
+    - プロンプト[/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)でプロジェクト憲章を作成
+        - [constitution.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/memory/constitution.md) 
             - 併せてテンプレート[constitution-template.md](.specify/templates/constitution-template.md)を見るとよいです。
-    - プロンプト[/speckit.specify](.github/prompts/speckit.specify.prompt.md)で作成
+    - プロンプト[/speckit.specify](.github/prompts/speckit.specify.prompt.md)で機能仕様を作成
         - [spec.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/spec.md)
+            - この時に、specsフォルダの作成や、仕様毎にgitのブランチが切られます。
             - 併せてテンプレート[spec-template.md](.specify/templates/spec-template.md)を見るとよいです。
-    - プロンプト[/speckit.plan](.github/prompts/speckit.plan.prompt.md)で作成
+    - プロンプト[/speckit.plan](.github/prompts/speckit.plan.prompt.md)で実装計画を作成
         - [plan.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/plan.md)
             - 併せてテンプレート[plan-template.md](.specify/templates/plan-template.md)を見るとよいです。
+        - [copilot-instructions.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.github/copilot-instructions.md) に、当該plan.mdを参照するように指示が追加されます。
         - 併せて、以下の`research.md`、`data-model.md`、`contracts/`、`quickstart.md`が、どのように作成されるかは実行するワークフローが[Phase](.github/agents/speckit.plan.agent.md#phases)に書かれているので、これも見るとプロンプトの流れがより理解できると思います
             - [research.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/research.md)
             - [data-model.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/data-model.md)
             - [contracts/](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/contracts/)
             - [quickstart.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/quickstart.md)
 
-    - プロンプト[/speckit.tasks](.github/prompts/speckit.tasks.prompt.md)で作成
+    - プロンプト[/speckit.tasks](.github/prompts/speckit.tasks.prompt.md)で実装タスクを作成
         - [tasks.md](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/specs/001-photo-album-organizer/tasks.md)
             - 併せてテンプレート[tasks-template.md](.specify/templates/tasks-template.md)を見るとよいです。
 
