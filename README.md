@@ -3,16 +3,26 @@
 ## はじめに
 - [Spec Kit](https://github.com/github/spec-kit)の[Getting Started](https://github.com/github/spec-kit#-get-started)を通して、仕様駆動開発で、どういったmdを準備しているのかといった、mdの内容、構造、プロンプトの流れ等、仕組みを理解して、自分たちの開発の参考にするためのものです。
 
-- mainブランチは[Initialize a project](https://github.com/github/spec-kit#2-initialize-a-project)した時点のものです。
+- Spec Kitのドキュメントの以下の記載を読むと、仕様駆動開発（SDD）の考え方や、下で説明しているSpec kit の仕組みの理解が深まると思います。
+    - [Spec Kit Documentation](https://github.com/github/spec-kit#spec-kit-documentation)
+        - 特に[この章](https://github.com/github/spec-kit/blob/main/spec-driven.md#implementation-approaches)でSDDのメソトロジーをとるのに、カスタムエージェントとして必要なものが概念としてわかる。
+
+        - [この章](https://github.com/github/spec-kit/blob/main/spec-driven.md#streamlining-sdd-with-commands)で、SDDのメソトロジーに基づくSpec Kitによるワークフローを効率化するために提供されるスラッシュコマンドがわかる。
+
+        - [この章](https://github.com/github/spec-kit/blob/main/spec-driven.md#template-driven-quality-how-structure-constrains-llms-for-better-outcomes)で、テンプレート駆動型品質の考え方として、スラッシュコマンドの真の力は、自動化にあるだけでなく、テンプレートがLLMの出力を生産的な方法で制約する、洗練されたプロンプトとして機能し、高品質の仕様へ導くことにあるということがわかる。
+
+## このリポジトリのブランチ
+
+- mainブランチは[Initialize a project](https://github.com/github/spec-kit#2-initialize-a-project)の`specify init`コマンドを実行した時点のものです。
 - [Getting Started](https://github.com/github/spec-kit#-get-started)のコマンドを実行したものは、[001-photo-album-organizerブランチ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer)にあります。
 
 ## Spec Kitの構造を理解する
-- [Getting Started](https://github.com/github/spec-kit#-get-started)の手順を実行し、コーディングエージェントとしてGitHub Copilotを選択すると、以下のような構造のプロジェクトができます。mainブランチがその直後の状態です。
+- [Getting Started](https://github.com/github/spec-kit#-get-started)の手順に従い、`specify init`コマンドを実行しコーディングエージェントとしてGitHub Copilotを選択すると、以下のような構造のプロジェクトができます。前述のとおり、mainブランチがその直後の状態です。
     - [.github](.github)
     - [.specify](.specify)
     - [.vscode](.vscode)
 
-- [Getting Started](https://github.com/github/spec-kit#-get-started)では、以下のプロンプトを実行するように指示されています。
+- [Getting Started](https://github.com/github/spec-kit#-get-started)では、以下のスラッシュコマンドを実行するように指示されています。
     - [/speckit.constitution](.github/prompts/speckit.constitution.prompt.md)
         - プロジェクト憲章の作成
     - [/speckit.specify](.github/prompts/speckit.specify.prompt.md)
@@ -24,7 +34,7 @@
     - [/speckit.implement](.github/prompts/speckit.implement.prompt.md)
         - 実装計画に基づいた実装タスクを実行
 
-- 各プロンプトの中身を除くと、`agent`として、カスタムエージェント名が書かれているだけなので、各プロンプトに対応するカスタムエージェントの定義の中身を覗いてみることで、プロンプトの内容や、プロンプトの流れを理解することができます。
+- 各スラッシュコマンドの中身は、`agent`として、カスタムエージェント名が書かれているだけです。ですので、各スラッシュコマンドに対応するカスタムエージェントの定義の中身を覗いてみることで、プロンプトの内容や、プロンプトの流れを理解することができます。
     - [speckit.constitution.agent.md](.github/agents/speckit.constitution.agent.md)
     - [speckit.specify.agent.md](.github/agents/speckit.specify.agent.md)
     - [speckit.plan.agent.md](.github/agents/speckit.plan.agent.md)
@@ -37,7 +47,7 @@
     - `## Outline`
     - `## Mandatory Post-Execution Hooks`
 
-- 以下の3つは、全てのカスタムエージェントの定義に共通している内容のようです
+- 以下の3つは、全てのカスタムエージェントの定義に共通している内容のようです。
     - `## User Input`には、ユーザの入力内容（`$ARGUMENTS`）に従う旨が記載されています。
     - `## Pre-Execution Checks`には、プロンプトの実行前に、ユーザの入力内容が正しいかどうかを確認するためのチェック項目が記載されています。
         - エージェントにより生成される[.specify/extensions.yml](https://github.com/mysd33/my-speckit-project/blob/001-photo-album-organizer/.specify/extensions.yml)に記載された拡張機能のフックの定義に基づいて、前処理を実行します。
@@ -47,7 +57,7 @@
         - `## Pre-Execution Checks`と同様に、エージェントにより生成される[.specify/extensions.yml]に記載された拡張機能のフックの定義に基づいて、後処理を実行します。
 
 
-- なので、`## Outline`に、そのカスタムエージェントが実施する本処理の内容が書かれていて、ここを中心に、プロンプトの内容や、プロンプトの流れを理解していくと良いと思います。
+- 結局のところ、`## Outline`に、そのカスタムエージェントが実施する本処理の内容が書かれていて、ここを中心に、プロンプトの内容や、プロンプトの流れを理解していくと良いと思います。
     - [speckit.constitution.agent.mdのOutline](.github/agents/speckit.constitution.agent.md#outline)
     - [speckit.specify.agent.mdのOutline](.github/agents/speckit.specify.agent.md#outline)
     - [speckit.plan.agent.mdのOutline](.github/agents/speckit.plan.agent.md#outline)。
@@ -59,7 +69,7 @@
     - [templates](.specify/templates)
 
 
-- 各プロンプトおよびカスタムエージェント、スクリプトや成果物テンプレートの定義により、どういうアウトプットが実際に生成されるのかは、[001-photo-album-organizerブランチ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)の中身を見ていくとわかります。
+- 各スラッシュコマンドによるプロンプトおよびカスタムエージェント、スクリプトや成果物テンプレートの定義により、どういうアウトプットが実際に生成されるのかは、[001-photo-album-organizerブランチ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)の中身を見ていくとわかります。
     - デフォルトだと、[specsフォルダ](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs)に、仕様毎にフォルダができて、その中に、プロンプトのアウトプットであるmdファイルが生成されていきます。
     - [specs/001-photo-album-organizer](https://github.com/mysd33/my-speckit-project/tree/001-photo-album-organizer/specs/001-photo-album-organizer)フォルダに成果物があります。
 
